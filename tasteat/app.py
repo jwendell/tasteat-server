@@ -3,6 +3,7 @@ from flask import Flask, jsonify, request
 from flask_cors import CORS
 from recipes import Recipes
 from db import db
+import admin
 
 app = Flask("tasteat")
 
@@ -11,7 +12,7 @@ cfg = os.path.join(os.getcwd(), 'config', config_name + '.cfg')
 app.config.from_pyfile(cfg, silent=False)
 
 db.init_app(app)
-
+admin.configure_admin(app)
 CORS(app)
 
 
