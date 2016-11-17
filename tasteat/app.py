@@ -24,7 +24,7 @@ def hello_world():
 @app.route("/api/recipes")
 def api_get_recipes():
     recipes = Recipes()
-    recipes.ingredients = request.args.getlist('ingredients')
+    recipes.ingredients = request.args.getlist('ingredients[]')
     recipes.fulltext = request.args.get('fullText')
     recipes.lang = request.args.get('lang')
     return jsonify(recipes=recipes.get_recipes(), not_found=recipes._not_founds), 200
