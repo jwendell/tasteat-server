@@ -46,16 +46,16 @@ class Filters(object):
 
     def get_recipe_categories(self):
         sql = 'select id, name, false as selected from recipe_category inner join recipe_category_translation on recipe_category.id = recipe_category_translation.category_id where lang = "{lang}"'.format(lang=self.lang)
-        res = db.query(sql)
+        res = db.engine.execute(sql)
         recipe_categories = []
         for row in res:
-            recipe_categories.append(row)
+            recipe_categories.append(dict(row))
         return recipe_categories
 
     def get_total_time_categories(self):
         sql = 'select id, name, min, max, false as selected from total_time_category inner join total_time_category_translation on total_time_category.id = total_time_category_translation.category_id where lang = "{lang}"'.format(lang=self.lang)
-        res = db.query(sql)
+        res = db.engine.execute(sql)
         total_time_categories = []
         for row in res:
-            total_time_categories.append(row)
+            total_time_categories.append(dict(row))
         return total_time_categories

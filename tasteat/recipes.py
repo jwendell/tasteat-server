@@ -51,10 +51,10 @@ class Recipes(object):
         self._get_ingredient_ids()
 
         sql = self._get_sql()
-        res = db.query(sql)
+        res = db.engine.execute(sql)
         recipes = []
         for row in res:
-            recipes.append(row)
+            recipes.append(dict(row))
         return recipes
 
     def _get_sql(self):
@@ -89,7 +89,7 @@ class Recipes(object):
 
         for ingredient in total_ingredients:
             sql = u'select ingredient_id from ingredient_translation where name = "{}" {}'.format(ingredient, lang)
-            res = db.query(sql)
+            res = db.engine.execute(sql)
             found = None
             for row in res:
                 found = row['ingredient_id']

@@ -1,2 +1,2 @@
-from flask_dataset import Dataset
-db = Dataset()
+from flask_sqlalchemy import SQLAlchemy
+db = SQLAlchemy()
